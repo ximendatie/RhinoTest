@@ -15,6 +15,16 @@ with (swingNames) {
  var name = jsFunction.getName();   
  System.out.println("get name from java source: " + name);   
  jsFunction.setHandler(log);    
+ 
+ 
+ 
+ 
+// MQTTsub
+// client = new MQTTsub();  
+// client.start();
+ 
+ 
+ 
 }    
   
 java.lang.System.out.println("not use swingNames");   

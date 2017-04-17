@@ -60,8 +60,8 @@ public class JSExploration
     public static void main(String[] args)   
     {   
     	JSExploration jsExploration = new JSExploration();
-    	
-        String filename = System.getProperty("user.dir") + "/src/jscode/jsmap.js";       
+        String filename = System.getProperty("user.dir") + "/src/jscode/jsmap.js"; 
+//      运行
         Object result = jsExploration.runJavaScript(filename);   
         
         Scriptable scope = jsExploration.getScope();   
@@ -70,15 +70,29 @@ public class JSExploration
         Scriptable b = (Scriptable) obj.get("b", obj);   
         System.out.println("b[0] == " + b.get(0, b));   
         Boolean flag = (Boolean) scope.get("flag", scope);   
-        System.out.println(flag);   
-  
-        Scriptable myobj = (Scriptable) scope.get("obj", scope);   
-        Boolean myflag = (Boolean) scope.get("flag", scope);   
-        System.out.println(myflag);   
-  
+        System.out.println(flag);  
+        
+//        调用js的函数定义成功
+        Function mynext = (Function)scope.get("next",scope);
+        Object testNext = mynext.call(Context.getCurrentContext(), scope, scope,new Object[] { 4 });
+        System.out.println(Context.toString(testNext)+"  -successful"); 
+        
         Scriptable jsFunction = (Scriptable) scope.get("jsFunction", scope);   
         Function fc = (Function) jsFunction.get("handler", jsFunction);   
-        Object isPrime = fc.call(Context.getCurrentContext(), jsFunction, fc, new Object[] { "this is my test" });   
+        Object isPrime = fc.call(Context.getCurrentContext(), jsFunction, fc, new Object[] { "this is my test" });
+        
+        
+//        MQTTpub
+//        JSExploration jsExploration1 = new JSExploration();
+//        String filename1 = System.getProperty("user.dir") + "/src/jscode/pub.js"; 
+////      运行
+//        Object result1 = jsExploration1.runJavaScript(filename1);
+        
+//        MQTTsub
+        JSExploration jsExploration2 = new JSExploration();
+        String filename2 = System.getProperty("user.dir") + "/src/jscode/sub.js"; 
+//      运行
+        Object result2 = jsExploration2.runJavaScript(filename2);
     }   
 }   
   
